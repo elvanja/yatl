@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Task.create([
+    {description: 'write to YATL admin how awesome the site is', priority: 100},
+    {description: 'buy milk'},
+    {description: 'kiss family', priority: 1_000_000},
+    {description: 'enjoy a tea cup'},
+    {description: 'have lunch'},
+    {description: 'drink beer'}
+], :without_protection => true)
