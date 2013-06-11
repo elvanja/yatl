@@ -2,7 +2,7 @@
 
   #new-task-form-container
     %form{"ng-submit" => "addTask()"}
-      %input{"type" => "text", "ng-model" => "taskDescription", "size" => 60, "placeholder" => "type the new task description"}
+      %input{"type" => "text", "ng-model" => "newTaskDescription", "size" => 40, "placeholder" => "type the new task description"}
       %input.btn-primary{"type" => "submit", "value" => "Add"}
 
   #task-list-container
@@ -13,12 +13,24 @@
           %small [{{task.priority}}]
 
   #task-view-container{"ng-show" => "selectedTask"}
-    %h2 {{selectedTask.description}}
-    %div Priority {{selectedTask.priority}}
-    %div Created {{selectedTask.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}
-    %div Last updated {{selectedTask.updatedAt | date: 'yyyy-MM-dd HH:mm:ss'}}
+    %span{"ng-hide" => "editing", "ng-click" => "editing = true"}
+      %h2 {{selectedTask.description}}
+      %div Priority {{selectedTask.priority}}
+      %div Created {{selectedTask.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}
+      %div Last updated {{selectedTask.updatedAt | date: 'yyyy-MM-dd HH:mm:ss'}}
+
+    %form{"ng-show" => "editing", "ng-submit" => "updateTask(); editing = false"}
+      %h3
+        Description
+        %input{"type" => "text", "ng-model" => "taskDescription", "size" => 40}
+      %h3
+        Priority
+        %input{"type" => "number", "ng-model" => "taskPriority"}
+      %div
+        %input.btn-primary{"type" => "submit", "value" => "Save changes"}
+        %input.btn-primary{"type" => "button", "value" => "Cancel editing", "ng-click" => "editing = false"}
 
     %br
-    #delete-task-form-container
+    #delete-task-form-container{"ng-hide" => "editing"}
       %form{"ng-submit" => "deleteTask()"}
         %input.btn-primary{"type" => "submit", "value" => "Delete task"}

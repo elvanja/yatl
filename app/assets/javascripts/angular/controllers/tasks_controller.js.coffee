@@ -22,12 +22,15 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $loca
     'active' if $scope.selectedTask == task
 
   # Set the selected task to the one which was clicked
+  # Remember bind values for edit form
   $scope.showTask = (task) ->
     $scope.selectedTask = task
+    $scope.taskDescription = $scope.selectedTask.description
+    $scope.taskPriority = $scope.selectedTask.priority
 
   # Add task
   $scope.addTask = ->
-    task = new Task {description: $scope.taskDescription, priority: -1}
+    task = new Task {description: $scope.newTaskDescription, priority: -1}
     task.create()
       .then (result) ->
         $scope.loadTasks(result)
