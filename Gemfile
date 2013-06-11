@@ -4,6 +4,7 @@ gem 'rails', '3.2.11'
 gem 'pg'
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'thin'
 
 # inherit all restful actions into controllers
 # https://github.com/josevalim/inherited_resources
