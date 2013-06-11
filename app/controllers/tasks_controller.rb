@@ -10,7 +10,7 @@ class TasksController < ApplicationController
   def create
     create! do |success, failure|
       success.html { redirect_to tasks_url, notice: 'Task was successfully created.' }
-      success.json { head :no_content }
+      success.json { render json: @task, status: :created, location: @task }
       failure.html { render action: "new" }
       failure.json { render json: @task.errors, status: :unprocessable_entity }
     end

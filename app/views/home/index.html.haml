@@ -15,8 +15,8 @@
   #task-view-container{"ng-show" => "selectedTask"}
     %h2 {{selectedTask.description}}
     %div Priority {{selectedTask.priority}}
-    %div Created {{selectedTask.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
-    %div Last updated {{selectedTask.updated_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+    %div Created {{selectedTask.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}
+    %div Last updated {{selectedTask.updatedAt | date: 'yyyy-MM-dd HH:mm:ss'}}
 
     %br
     #delete-task-form-container

@@ -3,12 +3,19 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $loca
   $scope.selectedTask = null
 
   # Gather the tasks and set the selected one to the first on success
-  $scope.tasks = Task.query()
-  $scope.tasks
-    .then ->
-      $scope.selectedTask = $scope.tasks[0]
-    , (error) ->
-      alert "Error trying to get tasks (" + error + ")"
+  $scope.loadTasks = (task) ->
+    $scope.tasks = Task.query()
+    $scope.tasks
+      .then (results) ->
+        task_to_show = results[0]
+        if task
+          matching_tasks = results.filter (from_results) ->
+            from_results.id == task.id
+          task_to_show = matching_tasks[0]
+        $scope.showTask task_to_show
+      , (error) ->
+        alert "Error trying to get tasks (" + error + ")"
+  $scope.loadTasks()
 
   # Determines if given task is selected or not
   $scope.isActive = (task) ->
@@ -22,9 +29,8 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $loca
   $scope.addTask = ->
     task = new Task {description: $scope.taskDescription, priority: -1}
     task.create()
-      .then ->
-        $scope.tasks = Task.query()
-        $scope.showTask task
+      .then (result) ->
+        $scope.loadTasks(result)
       , (error) ->
         alert "Error trying to save a new task (" + error + ")"
 
@@ -32,9 +38,8 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $loca
   $scope.updateTask = ->
     task = new Task {id: $scope.selectedTask.id, description: $scope.taskDescription, priority: $scope.taskPriority}
     task.update()
-      .then ->
-        $scope.tasks = Task.query()
-        $scope.showTask task
+      .then (result) ->
+        $scope.loadTasks(task)
       , (error) ->
         alert "Error trying to update existing task (" + error + ")"
 
@@ -42,8 +47,7 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $loca
   $scope.deleteTask = ->
     $scope.selectedTask.delete()
       .then ->
-        $scope.tasks = Task.query()
-        $scope.showTask $scope.tasks[0]
+        $scope.loadTasks()
       , (error) ->
         alert "Error trying to delete existing task (" + error + ")"
 ]
