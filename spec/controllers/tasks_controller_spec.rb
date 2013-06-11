@@ -75,9 +75,9 @@ describe TasksController do
         expect(assigns(:task)).to be_persisted
       end
 
-      it "redirects to the created task" do
+      it "redirects to the task list" do
         post :create, {:task => valid_attributes}, valid_session
-        expect(response).to redirect_to(Task.last)
+        expect(response).to redirect_to(tasks_url)
       end
     end
 
@@ -92,6 +92,7 @@ describe TasksController do
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
+        Task.any_instance.stub(:errors).and_return(["has errors"]) # https://github.com/josevalim/inherited_resources/issues/38
         post :create, {:task => { "description" => "invalid value" }}, valid_session
         expect(response).to render_template("new")
       end
@@ -116,10 +117,10 @@ describe TasksController do
         expect(assigns(:task)).to eq(task)
       end
 
-      it "redirects to the task" do
+      it "redirects to the task list" do
         task = Task.create! valid_attributes
         put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
-        expect(response).to redirect_to(task)
+        expect(response).to redirect_to(tasks_url)
       end
     end
 
@@ -136,6 +137,7 @@ describe TasksController do
         task = Task.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
+        Task.any_instance.stub(:errors).and_return(["has errors"]) # https://github.com/josevalim/inherited_resources/issues/38
         put :update, {:id => task.to_param, :task => { "description" => "invalid value" }}, valid_session
         expect(response).to render_template("edit")
       end

@@ -4,7 +4,14 @@ gem 'rails', '3.2.11'
 gem 'pg'
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'angular-rails'
+
+# inherit all restful actions into controllers
+# https://github.com/josevalim/inherited_resources
+gem 'inherited_resources'
+
+# AngularJS related stuff
+gem 'ng-rails-csrf', :git => "git://github.com/xrd/ng-rails-csrf.git"
+gem 'angularjs-rails-resource'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
