@@ -19,7 +19,7 @@
 .idea
 
 # Secret token
-secret_token.yml
+# secret_token.yml
 
 # Bundler, binstubs
 bin
