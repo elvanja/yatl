@@ -9,6 +9,9 @@ gem 'jquery-rails'
 # https://github.com/josevalim/inherited_resources
 gem 'inherited_resources'
 
+# http://ngmodules.org/modules/angularjs-rails-resource
+gem 'angularjs-rails-resource'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

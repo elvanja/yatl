@@ -1,8 +1,8 @@
 %div{"ng-controller" => "TasksController"}
 
-  #task-form-container
+  #new-task-form-container
     %form{"ng-submit" => "addTask()"}
-      %input{"type" => "text", "ng-model" => "taskDescription", "size" => 60, "placeholder" => "new task"}
+      %input{"type" => "text", "ng-model" => "taskDescription", "size" => 60, "placeholder" => "type the new task description"}
       %input.btn-primary{"type" => "submit", "value" => "Add"}
 
   #task-list-container
@@ -17,3 +17,8 @@
     %div Priority {{selectedTask.priority}}
     %div Created {{selectedTask.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
     %div Last updated {{selectedTask.updated_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+
+    %br
+    #delete-task-form-container
+      %form{"ng-submit" => "deleteTask()"}
+        %input.btn-primary{"type" => "submit", "value" => "Delete task"}

@@ -28,13 +28,16 @@ header {
   overflow: auto;
 }
 
-#task-form-container {
+#new-task-form-container {
   position: absolute;
   top: 50px;
   width: 450px;
   overflow: auto;
   left: 8px;
   bottom: 0;
+}
+
+#delete-task-form-container {
 }
 
 #task-list-container {
