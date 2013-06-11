@@ -1,6 +1,10 @@
 Yatl::Application.routes.draw do
   resources :tasks
 
+  scope '/api' do
+    resources :tasks
+  end
+
   root :to => 'tasks#index'
 
   # The priority is based upon order of creation:
