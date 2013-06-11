@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(:version => 20130611064252) do
 
   create_table "tasks", :force => true do |t|
     t.string   "description"
-    t.integer  "priority"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "priority",    :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
 end
