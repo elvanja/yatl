@@ -14,18 +14,18 @@ App.controller 'TasksController', ['$scope', 'Task', ($scope, Task) ->
   $scope.showTask = (task, row) ->
     $scope.selectedTask = task
 
-#  # Add task
-#  $scope.addTask = ->
-#    Task.save($scope.task)
-#    $scope.tasks.push({description: $scope.taskDescription, priority: -1})
-#    $scope.taskDescription = ''
-
   # Add task
   $scope.addTask = ->
-    task = $scope.selectedTask
-    task.create()
-      .then ->
-        $scope.browseToOverview()
-      , (error) ->
-        alert "Error trying to save a new task (" + error + ")"
+    Task.save($scope.task)
+    $scope.tasks.push({description: $scope.taskDescription, priority: -1})
+    $scope.taskDescription = ''
+
+#  # Add task
+#  $scope.addTask = ->
+#    task = $scope.selectedTask
+#    task.create()
+#      .then ->
+#        $scope.browseToOverview()
+#      , (error) ->
+#        alert "Error trying to save a new task (" + error + ")"
 ]
