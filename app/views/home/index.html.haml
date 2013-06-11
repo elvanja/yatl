@@ -1,12 +1,19 @@
-%h1 Listing tasks
-
 %div{"ng-controller" => "TasksController"}
-  #task-list-container
-    %table
-      %tr
-        %th Description
-        %th Priority
-      %tr{"ng-repeat" => "task in tasks"}
-        %td= "{{task.description}}"
-        %td= "{{task.priority}}"
 
+  #task-form-container
+    %form{"ng-submit" => "addTask()"}
+      %input{"type" => "text", "ng-model" => "taskDescription", "size" => 60, "placeholder" => "new task"}
+      %input.btn-primary{"type" => "submit", "value" => "Add"}
+
+  #task-list-container
+    %ul
+      %li{"ng-repeat" => "task in tasks", "ng-click" => "showTask(task)"}
+        %h3{"ng-class" => "isActive(task)"}
+          {{task.description}}
+          %small [{{task.priority}}]
+
+  #task-view-container{"ng-show" => "selectedTask"}
+    %h2 {{selectedTask.description}}
+    %div Priority {{selectedTask.priority}}
+    %div Created {{selectedTask.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}
+    %div Last updated {{selectedTask.updated_at | date: 'yyyy-MM-dd HH:mm:ss'}}
