@@ -11,7 +11,7 @@ secret_token_file = 'config/secret_token.yml'
 puts "==============================="
 puts ENV['SECRET_TOKEN']
 puts "==============================="
-secret_token = ENV['SECRET_TOKEN'] || YAML::load(File.open(secret_token_file))[Rails.env]['token'] if File.exists?(secret_token_file)
+secret_token = ENV['SECRET_TOKEN'] || (YAML::load(File.open(secret_token_file))[Rails.env]['token'] if File.exists?(secret_token_file))
 raise ConfigurationError.new("Could not load secret token from environment or #{File.expand_path(secret_token_file)}") unless secret_token
 
 Yatl::Application.config.secret_token = secret_token
