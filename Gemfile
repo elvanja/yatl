@@ -9,10 +9,6 @@ gem 'jquery-rails'
 # https://github.com/josevalim/inherited_resources
 gem 'inherited_resources'
 
-# AngularJS related stuff
-gem 'ng-rails-csrf', :git => "git://github.com/xrd/ng-rails-csrf.git"
-gem 'angularjs-rails-resource'
-
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
