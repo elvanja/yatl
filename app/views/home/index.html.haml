@@ -1,0 +1,12 @@
+%h1 Listing tasks
+
+%div{"ng-controller" => "TasksController"}
+  #task-list-container
+    %table
+      %tr
+        %th Description
+        %th Priority
+      %tr{"ng-repeat" => "task in tasks"}
+        %td= "{{task.description}}"
+        %td= "{{task.priority}}"
+
