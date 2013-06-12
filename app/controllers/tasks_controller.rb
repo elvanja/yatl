@@ -4,11 +4,14 @@ class TasksController < InheritedResources::Base
   respond_to :html, :json
 
   def index
-    @tasks = Task.all_by_priority
+    #@tasks = Task.all_by_priority
+    @tasks = current_user.tasks.all_by_priority
     index!
   end
 
   def create
+    @task = Task.new(params[:task])
+    @task.user = current_user
     create! do |success, failure|
       success.html { redirect_to tasks_url, notice: 'Task was successfully created.' }
       success.json { render json: @task, status: :created, location: @task }

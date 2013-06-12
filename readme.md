@@ -1,8 +1,6 @@
 # TODO
 
-* connect tasks with users
-  * users should see only their tasks
-  * current_user should do the trick
+* display current user details in navigation bar
 * delete surplus views and controllers
   * e.g. plain html task list ect.
   * only angular access should exist
