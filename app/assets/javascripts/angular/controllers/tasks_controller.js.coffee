@@ -1,8 +1,8 @@
-App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $location, Task) ->
+App.controller 'TasksController', ['$scope', '$location', 'Task', 'Session', ($scope, $location, Task, Session) ->
   # Attributes accessible on the view
   $scope.selectedTask = null
 
-  # Gather the tasks and set the selected one to the first on success
+  # Gather the tasks and select given one or the first in the list
   $scope.loadTasks = (task) ->
     $scope.tasks = Task.query()
     $scope.tasks
@@ -15,7 +15,6 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $loca
         $scope.showTask task_to_show
       , (error) ->
         alert "Error trying to get tasks (" + error + ")"
-  $scope.loadTasks()
 
   # Determines if given task is selected or not
   $scope.isActive = (task) ->
@@ -53,4 +52,14 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', ($scope, $loca
         $scope.loadTasks()
       , (error) ->
         alert "Error trying to delete existing task (" + error + ")"
+
+  $scope.isAuthenticated = ->
+    Session.authenticated()
+
+  # Initialization
+  init = ->
+    if Session.authenticated()
+      $scope.loadTasks()
+
+  init()
 ]

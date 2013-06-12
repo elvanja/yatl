@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="yatl" ng-init="current_user = <%= current_user ? current_user.to_json : nil %>;">
+<!--<html ng-app="yatl" ng-init="current_user = <%= current_user ? current_user.to_json : nil %>;">-->
+<html ng-app="yatl">
 <head>
   <title>Yatl</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>-->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>

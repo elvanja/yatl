@@ -1,18 +1,25 @@
 %div{"ng-controller" => "TasksController"}
 
-  #new-task-form-container
+  #login-form-container{"ng-hide" => "isAuthenticated()"}
+    %h2 Who are you?
+    %form{"ng-submit" => "login()"}
+      %input{"type" => "text", "ng-model" => "email", "size" => 40, "placeholder" => "enter your email"}
+      %input{"type" => "text", "ng-model" => "password", "size" => 40, "placeholder" => "enter the password"}
+      %input.btn-primary{"type" => "submit", "value" => "Identify"}
+
+  #new-task-form-container{"ng-show" => "isAuthenticated()"}
     %form{"ng-submit" => "addTask()"}
       %input{"type" => "text", "ng-model" => "newTaskDescription", "size" => 40, "placeholder" => "type the new task description"}
       %input.btn-primary{"type" => "submit", "value" => "Add"}
 
-  #task-list-container
+  #task-list-container{"ng-show" => "isAuthenticated()"}
     %ul
       %li{"ng-repeat" => "task in tasks", "ng-click" => "showTask(task)"}
         %h3{"ng-class" => "isActive(task)"}
           {{task.description}}
           %small [{{task.priority}}]
 
-  #task-view-container{"ng-show" => "selectedTask"}
+  #task-view-container{"ng-show" => "selectedTask && isAuthenticated()"}
     %span{"ng-hide" => "editing", "ng-click" => "editing = true"}
       %h2 {{selectedTask.description}}
       %div Priority {{selectedTask.priority}}

@@ -91,3 +91,20 @@ header {
     }
   }
 }
+
+#login-form-container {
+  position:absolute;
+  width:280px;
+  height:200px;
+  z-index:15;
+  top:40%;
+  left:50%;
+  margin:-150px 0 0 -150px;
+  padding: 20px;
+  background: #eeeeee;
+  border: 2px solid #d0d0d0;
+
+  input {
+    margin-top: 10px;
+  }
+}

@@ -1,1 +1,1 @@
-window.App = angular.module('yatl', ['rails'])
+window.App = angular.module('yatl', ['rails', 'ngResource'])
