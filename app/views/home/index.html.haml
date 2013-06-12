@@ -1,10 +1,12 @@
 %div{"ng-controller" => "TasksController"}
+  -# title and navigation
   %header
     %div Yet Another Todo List
     #navigation
       %div{"ng-show" => "isAuthenticated()", "ng-click" => "logout()"} Logout
 
-  #login-form-container{"ng-hide" => "isAuthenticated()"}
+  -# signup form, placed beneath login form so login form can be displayed first
+  #login-form-container{"ng-hide" => "isAuthenticated() || !signing_up"}
     %h2 How about some details?
     %form{"ng-submit" => "signup()"}
       %input{"type" => "text", "ng-model" => "email", "size" => 25, "placeholder" => "enter your email"}
@@ -12,33 +14,27 @@
       %input{"type" => "password", "ng-model" => "passwordConfirmation", "size" => 25, "placeholder" => "repeat the password"}
       %br
       %input.btn-primary{"type" => "submit", "value" => "Sign up"}
+      or
+      %a{href: "#", "ng-click" => "signing_up = false"} sign in
 
-  -##login-form-container{"ng-hide" => "isAuthenticated() || !signup"}
-  -#  %h2 How about some details?
-  -#  %form{"ng-submit" => "signup()"}
-  -#    %input{"type" => "text", "ng-model" => "email", "size" => 25, "placeholder" => "enter your email"}
-  -#    %input{"type" => "password", "ng-model" => "password", "size" => 25, "placeholder" => "enter the password"}
-  -#    %input{"type" => "password", "ng-model" => "passwordConfirmation", "size" => 25, "placeholder" => "repeat the password"}
-  -#    %br
-  -#    %input.btn-primary{"type" => "submit", "value" => "Sign up"}
-  -#    or
-  -#    %a{href: "#", "ng-click" => "signup = false"} sign in
-  -#
-  -##login-form-container{"ng-hide" => "isAuthenticated() || signup"}
-  -#  %h2 Who are you?
-  -#  %form{"ng-submit" => "login()"}
-  -#    %input{"type" => "text", "ng-model" => "email", "size" => 25, "placeholder" => "enter your email"}
-  -#    %input{"type" => "password", "ng-model" => "password", "size" => 25, "placeholder" => "enter the password"}
-  -#    %br
-  -#    %input.btn-primary{"type" => "submit", "value" => "Let me in"}
-  -#    or
-  -#    %a{href: "#", "ng-click" => "signup = true"} sign up
+  -# login form
+  #login-form-container{"ng-hide" => "isAuthenticated() || signing_up"}
+    %h2 Who are you?
+    %form{"ng-submit" => "login()"}
+      %input{"type" => "text", "ng-model" => "email", "size" => 25, "placeholder" => "enter your email"}
+      %input{"type" => "password", "ng-model" => "password", "size" => 25, "placeholder" => "enter the password"}
+      %br
+      %input.btn-primary{"type" => "submit", "value" => "Let me in"}
+      or
+      %a{href: "#", "ng-click" => "signing_up = true"} sign up
 
+  -# new task form
   #new-task-form-container{"ng-show" => "isAuthenticated()"}
     %form{"ng-submit" => "addTask()"}
       %input{"type" => "text", "ng-model" => "newTaskDescription", "size" => 35, "placeholder" => "type the new task description"}
       %input.btn-primary{"type" => "submit", "value" => "Add"}
 
+  -# task list
   #task-list-container{"ng-show" => "isAuthenticated()"}
     %ul
       %li{"ng-repeat" => "task in tasks", "ng-click" => "showTask(task)"}
@@ -46,13 +42,16 @@
           {{task.description}}
           %small [{{task.priority}}]
 
+  -# single task view
   #task-view-container{"ng-show" => "isAuthenticated() && selectedTask != null"}
+    -# task details
     %span{"ng-hide" => "editing", "ng-click" => "editing = true"}
       %h2 {{selectedTask.description}}
       %div Priority {{selectedTask.priority}}
       %div Created {{selectedTask.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}
       %div Last updated {{selectedTask.updatedAt | date: 'yyyy-MM-dd HH:mm:ss'}}
 
+    -# task in place editing form
     %form{"ng-show" => "editing", "ng-submit" => "updateTask(); editing = false"}
       %h3
         Description
@@ -64,6 +63,7 @@
         %input.btn-primary{"type" => "submit", "value" => "Save changes"}
         %input.btn-primary{"type" => "button", "value" => "Cancel editing", "ng-click" => "editing = false"}
 
+    -# delete task form
     %br
     #delete-task-form-container{"ng-hide" => "editing"}
       %form{"ng-submit" => "deleteTask()"}

@@ -71,14 +71,14 @@ App.controller 'TasksController', ['$log', '$http', '$scope', '$location', 'Task
 
   # Signup
   $scope.signup = ->
-    $log.info "about to trigger signup"
     Session.signup($scope.email, $scope.password, $scope.passwordConfirmation, signupSuccessHandler)
 
   signupSuccessHandler = ->
-    alert "Signup successfull !!!"
+    $scope.login()
 
   # Initialization
   init = ->
+    $scope.signing_up = false
     $http.defaults.headers.common['X-AUTH-TOKEN'] = Session.getAuthToken()
     if $scope.isAuthenticated()
       $scope.loadTasks()

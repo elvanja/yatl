@@ -16,7 +16,7 @@ App.factory 'Session', ['$log', '$cookieStore', '$http', ($log, $cookieStore, $h
         successHandler() if angular.isFunction successHandler
       .error (error) ->
         $cookieStore.remove('_yatl_auth_token')
-        alert "Could not verify your credentials, please try again (" + error + ")"
+        alert "Could not verify your credentials, please try again"
 
   logout = ->
     $cookieStore.remove('_yatl_auth_token')
@@ -26,17 +26,16 @@ App.factory 'Session', ['$log', '$cookieStore', '$http', ($log, $cookieStore, $h
     transform = (data) ->
       $.param(data)
 
-    $log.info "about to signup remotely"
-    $http.get('/users/sign_up.json', {email: email, password: password, password_confirmation: passwordConfirmation}, {
+    $http.post('/users.json', {user: {email: email, password: password, password_confirmation: passwordConfirmation}}, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
       transformRequest: transform
     })
       .success (response) ->
-        alert "response: " + response
-#        successHandler() if angular.isFunction successHandler
+        successHandler() if angular.isFunction successHandler
       .error (error) ->
-        alert "Could not sign you up, please try again (" + error + ")"
+        alert "Could not sign you up, please try again \n" + error["error_messages"]
 
+  #https://github.com/karlfreeman/angular-devise/blob/master/app/assets/javascripts/angular-devise/services/session.js
   getAuthToken = ->
     $cookieStore.get('_yatl_auth_token')
 

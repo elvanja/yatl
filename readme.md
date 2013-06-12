@@ -1,23 +1,31 @@
 # TODO
-use fixed auth_token
-wrap requests or even better use headers to pass in the token to rails
 
-currently using http://matteomelani.wordpress.com/2011/10/17/authentication-for-mobile-devices/
-maybe if token controller is changed to check headers, that would be better
-but think about that only after you manage to wrap Task calls with auth token
-more examples @ https://github.com/plataformatec/devise/wiki/How-To:-Simple-Token-Authentication-Example
-
-http://nils-blum-oeste.net/angularjs-send-auth-token-with-every--request/
-https://github.com/FineLinePrototyping/angularjs-rails-resource/issues/32
-
-# Example projects with Angular.js and Devise or similar
-
-https://github.com/weyewe/angular-cast-devise
-https://github.com/karlfreeman/angular-devise
-https://github.com/kirs/rails-4-angular-sorcery
+* connect tasks with users
+  * users should see only their tasks
+  * current_user should do the trick
+* delete surplus views and controllers
+  * e.g. plain html task list ect.
+  * only angular access should exist
 
 # Resources
 
-http://coderberry.me/blog/2013/04/23/angularjs-on-rails-4-part-2/
-http://mightygio.com/2013/03/integrating-rails-and-angularjs-part-1-structure/
+## Example projects with Angular.js and Devise or similar
 
+* [Angular Cast Devise](https://github.com/weyewe/angular-cast-devise)
+* [Angular Devise](https://github.com/karlfreeman/angular-devise)
+* [Angular Sorcery](https://github.com/kirs/rails-4-angular-sorcery)
+
+## Integrating Angular.js & Rails
+
+[AngularJS Rails Resource](https://github.com/FineLinePrototyping/angularjs-rails-resource)
+[AngularJS on Rails 4, Part 2 of series](http://coderberry.me/blog/2013/04/23/angularjs-on-rails-4-part-2/)
+[Integrating Rails and AngularJS, Part 1 of series](http://mightygio.com/2013/03/integrating-rails-and-angularjs-part-1-structure/)
+
+## Devise & Ajax
+
+[A Simple Token Authentication Service for Mobile Devices Using Rails 3 and Devise](http://matteomelani.wordpress.com/2011/10/17/authentication-for-mobile-devices/)
+[Devise How To: Simple Token Authentication Example](https://github.com/plataformatec/devise/wiki/How-To:-Simple-Token-Authentication-Example)
+[How To Hack Devise and Sign Up Your Users via Ajax In Rails](http://natashatherobot.com/devise-sign-up-ajax-rails/)
+[Configuring Devise Controllers](https://github.com/plataformatec/devise#configuring-controllers)
+[AngularJS: Send auth token with every request](http://nils-blum-oeste.net/angularjs-send-auth-token-with-every--request/)
+[AngularJS Rails Resource: Custom action urls](https://github.com/FineLinePrototyping/angularjs-rails-resource/issues/32)
