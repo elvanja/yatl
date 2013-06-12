@@ -1,6 +1,7 @@
-App.controller 'TasksController', ['$scope', '$location', 'Task', 'Session', ($scope, $location, Task, Session) ->
+App.controller 'TasksController', ['$log', '$http', '$scope', '$location', 'Task', 'Session', ($log, $http, $scope, $location, Task, Session) ->
   # Attributes accessible on the view
   $scope.selectedTask = null
+  $scope.tasks = null
 
   # Gather the tasks and select given one or the first in the list
   $scope.loadTasks = (task) ->
@@ -54,12 +55,27 @@ App.controller 'TasksController', ['$scope', '$location', 'Task', 'Session', ($s
         alert "Error trying to delete existing task (" + error + ")"
 
   $scope.isAuthenticated = ->
-    Session.authenticated()
+    Session.isAuthenticated()
+
+  # Login
+  $scope.login = ->
+    Session.login($scope.email, $scope.password, loginSuccessHandler)
+
+  loginSuccessHandler = ->
+    init()
+
+  # Logout
+  $scope.logout = ->
+    Session.logout()
+    init()
 
   # Initialization
   init = ->
-    if Session.authenticated()
+    $http.defaults.headers.common['X-AUTH-TOKEN'] = Session.getAuthToken()
+    if $scope.isAuthenticated()
       $scope.loadTasks()
+    else
+      $scope.tasks = null
 
   init()
 ]

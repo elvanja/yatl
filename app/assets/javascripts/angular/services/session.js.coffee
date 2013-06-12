@@ -1,41 +1,34 @@
-App.factory 'Session', ['$resource', ($resource) ->
+App.factory 'Session', ['$log', '$cookieStore', '$http', ($log, $cookieStore, $http) ->
 
-  service = $resource '/api/tokens/:param', {},
-    'login':
-      method: 'POST'
-    'logout':
-      method: 'DELETE'
+  isAuthenticated = ->
+    getAuthToken()?
 
-#  auth_token = 'WBMn7tg7JwKrNacDxT8i'
-  auth_token = null
+  login = (email, password, successHandler) ->
+    transform = (data) ->
+      $.param(data)
 
-  authenticated = ->
-    !!auth_token
+    $http.post( '/api/tokens.json', {email: email, password: password}, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+      transformRequest: transform
+    })
+      .success (response) ->
+        $cookieStore.put('_yatl_auth_token', response["token"])
+        successHandler() if angular.isFunction successHandler
+      .error (error) ->
+        $cookieStore.remove('_yatl_auth_token')
+        alert "Could not verify your credentials, please try again"
 
-  login = (newUser, resultHandler, errorHandler) ->
-    service.login newUser
-    , (result) ->
-      user = result.user || {}
-      user.authorized = result.authorized
-      resultHandler(result) if angular.isFunction resultHandler
-    , (error) ->
-      errorHandler(error) if angular.isFunction errorHandler
-
-  logout = (resultHandler, errorHandler) ->
-    service.logout param: user.id
-    , (result) ->
-      user = {}
-      resultHandler(result) if angular.isFunction resultHandler
-    , (error) ->
-      errorHandler(error) if angular.isFunction errorHandler
+  logout = ->
+    $cookieStore.remove('_yatl_auth_token')
+    getAuthToken()
 
   getAuthToken = ->
-    auth_token
+    $cookieStore.get('_yatl_auth_token')
 
   {
     login,
     logout,
-    authenticated,
+    isAuthenticated,
     getAuthToken
   }
 ]

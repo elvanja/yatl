@@ -17,6 +17,15 @@ header {
   line-height: 36px;
   font-weight: bold;
   padding-left: 15px;
+
+  #navigation {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    font-size: 14px;
+    font-weight: normal;
+    cursor: pointer;
+  }
 }
 
 #task-ctrl {

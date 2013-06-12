@@ -1,1 +1,1 @@
-window.App = angular.module('yatl', ['rails', 'ngResource'])
+window.App = angular.module('yatl', ['rails', 'ngResource', 'ngCookies'])

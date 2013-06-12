@@ -6,17 +6,11 @@
   <%= stylesheet_link_tag "application", :media => "all" %>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.min.js"></script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<header>
-  Yet Another Todo List <%= current_user ? "for #{current_user.email}" : "" %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-</header>
-
 
 <%= yield %>
 

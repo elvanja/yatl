@@ -1,10 +1,14 @@
 %div{"ng-controller" => "TasksController"}
+  %header
+    %div Yet Another Todo List
+    #navigation
+      %div{"ng-show" => "isAuthenticated()", "ng-click" => "logout()"} Logout
 
   #login-form-container{"ng-hide" => "isAuthenticated()"}
     %h2 Who are you?
     %form{"ng-submit" => "login()"}
       %input{"type" => "text", "ng-model" => "email", "size" => 40, "placeholder" => "enter your email"}
-      %input{"type" => "text", "ng-model" => "password", "size" => 40, "placeholder" => "enter the password"}
+      %input{"type" => "password", "ng-model" => "password", "size" => 40, "placeholder" => "enter the password"}
       %input.btn-primary{"type" => "submit", "value" => "Identify"}
 
   #new-task-form-container{"ng-show" => "isAuthenticated()"}
@@ -19,7 +23,7 @@
           {{task.description}}
           %small [{{task.priority}}]
 
-  #task-view-container{"ng-show" => "selectedTask && isAuthenticated()"}
+  #task-view-container{"ng-show" => "isAuthenticated() && selectedTask != null"}
     %span{"ng-hide" => "editing", "ng-click" => "editing = true"}
       %h2 {{selectedTask.description}}
       %div Priority {{selectedTask.priority}}
