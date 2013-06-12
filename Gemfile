@@ -5,6 +5,7 @@ gem 'pg'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'thin'
+gem 'devise'
 
 # inherit all restful actions into controllers
 # https://github.com/josevalim/inherited_resources

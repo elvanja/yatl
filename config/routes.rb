@@ -1,5 +1,6 @@
 Yatl::Application.routes.draw do
   resources :tasks
+  resources :users
 
   scope '/api' do
     resources :tasks

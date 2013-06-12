@@ -1,5 +1,4 @@
-class TasksController < ApplicationController
-  inherit_resources
+class TasksController < InheritedResources::Base
   respond_to :html, :json
 
   def index
