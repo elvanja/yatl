@@ -6,13 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(email: 'me@yatl.com', password: 'test123', password_confirmation: 'test123')
-
+user = User.create(email: 'me@yatl.com', password: 'test123', password_confirmation: 'test123')
 Task.create([
-    {description: 'write to YATL admin how awesome the site is', priority: 100},
-    {description: 'buy milk'},
-    {description: 'kiss family', priority: 1_000_000},
-    {description: 'enjoy a tea cup'},
-    {description: 'have lunch'},
-    {description: 'drink beer'}
+    {user: user, description: 'wake up'},
+    {user: user, description: 'kiss family', priority: 10},
+    {user: user, description: 'pet the dog'},
+    {user: user, description: 'brush teeth'}
+], :without_protection => true)
+
+other_user = User.create(email: 'you@yatl.com', password: 'test123', password_confirmation: 'test123')
+Task.create([
+    {user: other_user, description: 'write to YATL admin how awesome the site is', priority: 100},
+    {user: other_user, description: 'drink beer'}
 ], :without_protection => true)
