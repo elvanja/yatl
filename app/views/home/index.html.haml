@@ -2,8 +2,10 @@
   -# title and navigation
   %header
     %div Yet Another Todo List
-    #navigation
-      %div{"ng-show" => "isAuthenticated()", "ng-click" => "logout()"} Logout
+    #navigation{"ng-show" => "isAuthenticated()"}
+      %div Welcome {{current_user_email}}
+      %div= "  |  "
+      #logout{"ng-click" => "logout()"} Logout
 
   -# signup form, placed beneath login form so login form can be displayed first
   #login-form-container{"ng-hide" => "isAuthenticated() || !signing_up"}

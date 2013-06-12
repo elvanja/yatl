@@ -13,13 +13,16 @@ App.factory 'Session', ['$log', '$cookieStore', '$http', ($log, $cookieStore, $h
     })
       .success (response) ->
         $cookieStore.put('_yatl_auth_token', response["token"])
+        $cookieStore.put('_yatl_current_user_email', response["current_user_email"])
         successHandler() if angular.isFunction successHandler
       .error (error) ->
         $cookieStore.remove('_yatl_auth_token')
+        $cookieStore.remove('_yatl_current_user_email')
         alert "Could not verify your credentials, please try again"
 
   logout = ->
     $cookieStore.remove('_yatl_auth_token')
+    $cookieStore.remove('_yatl_current_user_email')
     getAuthToken()
 
   signup = (email, password, passwordConfirmation, successHandler) ->
@@ -39,11 +42,15 @@ App.factory 'Session', ['$log', '$cookieStore', '$http', ($log, $cookieStore, $h
   getAuthToken = ->
     $cookieStore.get('_yatl_auth_token')
 
+  getCurrentUserEmail = ->
+    $cookieStore.get('_yatl_current_user_email')
+
   {
     login,
     logout,
     signup,
     isAuthenticated,
-    getAuthToken
+    getAuthToken,
+    getCurrentUserEmail
   }
 ]

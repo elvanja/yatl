@@ -2,6 +2,7 @@ App.controller 'TasksController', ['$log', '$http', '$scope', '$location', 'Task
   # Attributes accessible on the view
   $scope.selectedTask = null
   $scope.tasks = null
+  $scope.current_user_email = null
 
   # Gather the tasks and select given one or the first in the list
   $scope.loadTasks = (task) ->
@@ -79,6 +80,7 @@ App.controller 'TasksController', ['$log', '$http', '$scope', '$location', 'Task
   # Initialization
   init = ->
     $scope.signing_up = false
+    $scope.current_user_email = Session.getCurrentUserEmail()
     $http.defaults.headers.common['X-AUTH-TOKEN'] = Session.getAuthToken()
     if $scope.isAuthenticated()
       $scope.loadTasks()

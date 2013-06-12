@@ -1,6 +1,5 @@
 # TODO
 
-* display current user details in navigation bar
 * delete surplus views and controllers
   * e.g. plain html task list ect.
   * only angular access should exist

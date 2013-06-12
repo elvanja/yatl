@@ -24,7 +24,16 @@ header {
     right: 30px;
     font-size: 14px;
     font-weight: normal;
-    cursor: pointer;
+
+    div {
+      display: inline;
+      color: #dddddd;
+    }
+
+    #logout {
+      cursor: pointer;
+      color: #ffffff;
+    }
   }
 }
 
