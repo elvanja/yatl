@@ -12,6 +12,8 @@
 ## Example projects with Angular.js and Devise or similar
 
 * [Angular Cast Devise](https://github.com/weyewe/angular-cast-devise)
+* [Angular + Rails port of Cafe Townsend application](https://github.com/sectore/CafeTownsend-Angular-Rails)
+* [Employee Training Tracker](https://github.com/FineLinePrototyping/employee-training-tracker)
 * [Angular Devise](https://github.com/karlfreeman/angular-devise)
 * [Angular Sorcery](https://github.com/kirs/rails-4-angular-sorcery)
 
