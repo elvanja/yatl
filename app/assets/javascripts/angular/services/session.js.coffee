@@ -29,7 +29,7 @@ App.factory 'Session', ['$log', '$cookieStore', '$http', ($log, $cookieStore, $h
     transform = (data) ->
       $.param(data)
 
-    $http.post('/users.json', {user: {email: email, password: password, password_confirmation: passwordConfirmation}}, {
+    $http.post('/api/users.json', {user: {email: email, password: password, password_confirmation: passwordConfirmation}}, {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
       transformRequest: transform
     })

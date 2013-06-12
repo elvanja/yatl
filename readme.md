@@ -1,8 +1,6 @@
-# TODO
+# Yet Another Todo List (YATL)
 
-* delete surplus views and controllers
-  * e.g. plain html task list ect.
-  * only angular access should exist
+A small demo app that tries to use AngularJS with Devise in a typical Rails API project
 
 # Resources
 
@@ -28,3 +26,7 @@
 [Configuring Devise Controllers](https://github.com/plataformatec/devise#configuring-controllers)
 [AngularJS: Send auth token with every request](http://nils-blum-oeste.net/angularjs-send-auth-token-with-every--request/)
 [AngularJS Rails Resource: Custom action urls](https://github.com/FineLinePrototyping/angularjs-rails-resource/issues/32)
+
+# TODO
+
+* confirmation dialog when deleting task
