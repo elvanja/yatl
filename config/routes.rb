@@ -1,9 +1,12 @@
 Yatl::Application.routes.draw do
+  devise_for :users
+
   resources :tasks
   resources :users
 
   scope '/api' do
     resources :tasks
+    resources :tokens, :only => [:create, :destroy]
   end
 
   root :to => 'home#index'

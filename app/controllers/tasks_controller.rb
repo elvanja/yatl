@@ -1,4 +1,6 @@
 class TasksController < InheritedResources::Base
+  prepend_before_filter :get_auth_token
+  before_filter :authenticate_user!
   respond_to :html, :json
 
   def index
@@ -21,6 +23,15 @@ class TasksController < InheritedResources::Base
       success.json { head :no_content }
       failure.html { render action: "edit" }
       failure.json { render json: @task.errors, status: :unprocessable_entity }
+    end
+  end
+
+  private
+
+  # http://stackoverflow.com/questions/7399645/using-auth-token-from-request-headers-instead-from-post-put-parameters-with-rail
+  def get_auth_token
+    if auth_token = params[:auth_token].blank? && request.headers["X-AUTH-TOKEN"]
+      params[:auth_token] = auth_token
     end
   end
 end

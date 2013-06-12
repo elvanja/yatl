@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="yatl">
+<html ng-app="yatl" ng-init="current_user = <%= current_user ? current_user.to_json : nil %>;">
 <head>
   <title>Yatl</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
@@ -11,8 +11,11 @@
 <body>
 
 <header>
-  Yet Another Todo List
+  Yet Another Todo List <%= current_user ? "for #{current_user.email}" : "" %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 </header>
+
 
 <%= yield %>
 

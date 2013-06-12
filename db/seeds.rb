@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.create(email: 'me@yatl.com', password: 'test123', password_confirmation: 'test123')
+
 Task.create([
     {description: 'write to YATL admin how awesome the site is', priority: 100},
     {description: 'buy milk'},
