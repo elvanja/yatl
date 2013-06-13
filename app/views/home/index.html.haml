@@ -42,7 +42,7 @@
       %li{"ng-repeat" => "task in tasks", "ng-click" => "showTask(task)"}
         %h3{"ng-class" => "isActive(task)"}
           {{task.description}}
-          %small [{{task.priority}}]
+          %small ({{task.priority}})
 
   -# single task view
   #task-view-container{"ng-show" => "isAuthenticated() && selectedTask != null"}
@@ -65,8 +65,7 @@
         %input.btn-primary{"type" => "submit", "value" => "Save changes"}
         %input.btn-primary{"type" => "button", "value" => "Cancel editing", "ng-click" => "editing = false"}
 
-    -# delete task form
+    -# delete task section, confirmation within action itself
     %br
     #delete-task-form-container{"ng-hide" => "editing"}
-      %form{"ng-submit" => "deleteTask()"}
-        %input.btn-primary{"type" => "submit", "value" => "Delete task"}
+      %button{"ng-click" => "deleteTask()"} Delete task

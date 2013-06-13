@@ -26,7 +26,3 @@ A small demo app that tries to use AngularJS with Devise in a typical Rails API 
 [Configuring Devise Controllers](https://github.com/plataformatec/devise#configuring-controllers)
 [AngularJS: Send auth token with every request](http://nils-blum-oeste.net/angularjs-send-auth-token-with-every--request/)
 [AngularJS Rails Resource: Custom action urls](https://github.com/FineLinePrototyping/angularjs-rails-resource/issues/32)
-
-# TODO
-
-* confirmation dialog when deleting task

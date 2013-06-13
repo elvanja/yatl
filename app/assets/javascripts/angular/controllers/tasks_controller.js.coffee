@@ -1,4 +1,4 @@
-App.controller 'TasksController', ['$log', '$http', '$scope', '$location', 'Task', 'Session', ($log, $http, $scope, $location, Task, Session) ->
+App.controller 'TasksController', ['$log', '$http', '$scope', '$location', '$window', 'Task', 'Session', ($log, $http, $scope, $location, $window, Task, Session) ->
   # Attributes accessible on the view
   $scope.selectedTask = null
   $scope.tasks = null
@@ -48,12 +48,14 @@ App.controller 'TasksController', ['$log', '$http', '$scope', '$location', 'Task
         alert "Error trying to update existing task (" + error + ")"
 
   # Delete task
+  # http://www.rqgg.net/topic/nzqwm-intercepting-ng-click-in-angularjs.html
   $scope.deleteTask = ->
-    $scope.selectedTask.delete()
-      .then ->
-        $scope.loadTasks()
-      , (error) ->
-        alert "Error trying to delete existing task (" + error + ")"
+    if($window.confirm("Are you sure?"))
+      $scope.selectedTask.delete()
+        .then ->
+          $scope.loadTasks()
+        , (error) ->
+          alert "Error trying to delete existing task (" + error + ")"
 
   $scope.isAuthenticated = ->
     Session.isAuthenticated()
